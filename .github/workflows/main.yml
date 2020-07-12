@@ -1,4 +1,9 @@
-on: push
+on:
+  schedule:
+    - cron:  '0 0 * * *'
+  pull_request:
+    branches:
+      - master
 jobs:
   repo-sync:
     runs-on: ubuntu-latest
