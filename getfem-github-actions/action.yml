@@ -1,0 +1,8 @@
+# action.yml
+name: 'getfem-github-actions'
+description: 'Run in getfem latest'
+inputs:
+outputs:
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
