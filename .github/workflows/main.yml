@@ -35,3 +35,36 @@ jobs:
         destination_repo: "git@github.com:getfem-doc/getfem.git"
         destination_branch: "refs/tags/*"
         ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+    - name: Get Job URL
+      uses: Tiryoh/gha-jobid-action@v0
+      id: jobs
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        job_name: script
+    - name: Setup SSH
+      uses: MrSquaare/ssh-setup-action@v2
+      with:
+        host: github.com
+        private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+    - name: git_config
+      env:
+        NAME: "getfem-auto-update"
+        EMAIL: "getfem-auto-update"
+      run: |
+        git branch -a
+        git config --global user.email $EMAIL
+        git config --global user.name $NAME
+    - name: commit
+      if: contains(github.event.head_commit.message, '[ci skip]') == false && contains(github.ref, 'master')
+      env:
+        ORGANIZATION: getfem-doc
+        REPO: getfem-github-actions
+        JOB_ID: ${{ steps.jobs.outputs.job_id }}
+        HTML_URL: ${{ steps.jobs.outputs.html_url }}
+      run: |
+        git add .
+        git commit --allow-empty -m "[ci skip] $JOB_ID
+        $HTML_URL"
+        git remote -v
+        git remote add github git@github.com:$ORGANIZATION/$REPO.git
+        git push github master
