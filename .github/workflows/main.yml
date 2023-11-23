@@ -38,6 +38,11 @@ jobs:
       with:
         host: github.com
         private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+    - name: checkout
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        token: ${{ secrets.PERSONAL_ACCESSTOKEN }}
     - name: git_config
       env:
         NAME: "getfem-auto-update"
@@ -46,11 +51,6 @@ jobs:
         git branch -a
         git config --global user.email $EMAIL
         git config --global user.name $NAME
-    - name: checkout with submodule
-      uses: actions/checkout@v4
-      with:
-        fetch-depth: 0
-        token: ${{ secrets.PERSONAL_ACCESSTOKEN }}
     - name: commit
       if: contains(github.event.head_commit.message, '[ci skip]') == false && contains(github.ref, 'master')
       env:
