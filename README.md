@@ -5,4 +5,4 @@
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](CODE_OF_CONDUCT.md)
 ![.github/workflows/main.yml](https://github.com/getfem-doc/getfem-github-actions/workflows/.github/workflows/main.yml/badge.svg)
 
-GetFEM GitHub Actions
+~GetFEM GitHub Actions~ :warning: This repository has been merged into the main GetFEM repository. :warning:
