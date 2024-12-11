@@ -6,3 +6,15 @@
 ![.github/workflows/main.yml](https://github.com/getfem-doc/getfem-github-actions/workflows/.github/workflows/main.yml/badge.svg)
 
 GetFEM GitHub Actions
+
+## Inputs
+
+None
+
+## Outputs
+
+None
+
+## Example usage
+
+uses: actions/getfem-github-actions@v1
